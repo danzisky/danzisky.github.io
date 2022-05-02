@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mulish">
+    <link rel="stylesheet" href="assets/css/main.css">
+</head>
+<body class="mulish" style="margin:81px 0px 60px 0px;">
+    <script src="https://unpkg.com/vue@3"></script>    
+    <!-- root div -->    
+    <div id="root">
+        <div class="row responsive">            
+            <div class="responsive half sticky-s">
+                <img :src="imageSrc" alt="" srcset="" style="width: 100%;"/>
+                <!-- picture div -->
+            </div>
+            <div class="responsive half padding-half pd-top-60 pd-bottom-20 detatch">
+                <!-- other half div -->
+                <div class="header-text main-primary">
+                    Welcome to Distancify.
+                    <br>                
+                    Create your account.
+                </div>
+                <div class="" style="padding-top: 12px;">
+                    <span class="member-text">
+                        Already a member?
+                    </span>
+                    
+                    <a class="signup">
+                        Sign In
+                    </a>
+                </div>
+                <div class="" style="margin-top: 35px;">
+                    <signup-form/>
+                </div>
+                
+            </div>
+        </div> 
+    </div>
+    
+    <script>
+        const signUp = Vue.createApp({
+            data: function() {
+                return {
+                    header: "Vue js for distancify",
+                    imageSrc: "assets/images/MediaPlaceholder.png",                                       
+                }
+            },
+            components: ['signup-form'],
+        })
+
+        signUp.component('signup-form', {
+            template: `
+                <form  @submit.prevent="submit" class="text-standard form-text">
+                    <div v-if="false">
+                        <label for="phone_number" class="label text-standard">Phone number</label>
+                        <div class="row">
+                            <select name="" id="" class="dc-select col-s-4" v-model="input.country" style="margin-right:12px;text-overflow:clip">
+                                <option v-for="country in countries" value="country.dial_code" class="block container">
+                                    <div class="">
+                                        <p><img :src="country.src" class="img block"/></p> {{country.name}} ({{country.dial_code}})
+                                    </div>                                    
+                                </option>
+                            </select>
+                            <input type="text" class="dc-input col-s-8" v-model="input.phone"/>
+                        </div>
+                    </div>
+                    <div>
+                        <label for="phone_number" class="label text-standard">Phone number</label>
+                        <div class="row">
+                            <div name="" id="" class="dc-input col-s-4 dropdown" @click="toggleCountries" style="margin-right: 8px;">
+                                <div class="left-center" style="margin:auto">
+                                    <div class="row ">
+                                        <div class="inline">
+                                            <img :src="setCountry.src" class="img block" style="width:20px;height:15px"/>
+                                        </div>
+                                        <div class="inline">
+                                            {{setCountry.dial_code}}
+                                        </div>
+                                        <div class="inline text-right " v-if="false">
+                                            <svg width="14" height="9" viewBox="0 0 14 9" fill="none" xmlns="http://www.w3.org/2000/svg" class="right block">
+                                                <path d="M13.5625 1.01477L7.30917 7.26752C7.26859 7.30816 7.22039 7.3404 7.16734 7.36239C7.11429 7.38439 7.05743 7.39571 7 7.39571C6.94257 7.39571 6.8857 7.38439 6.83266 7.36239C6.77961 7.3404 6.73141 7.30816 6.69083 7.26752L0.4375 1.01477" stroke="#9D9FA6" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                                                     
+                                </div> 
+                            </div>
+                            <input type="text" class="dc-input col-s-8" v-model="input.phone"/>
+                        </div>
+                        <div v-if="showCountries "class="dc-input container" style="position:absolute;width:inherit;height:200px;overflow-y:scroll">
+                            <div v-for="country in countries" value="country.dial_code" class="container hoverable-black" :key="country.code" @click="setCode(country.code)" @click="toggleCountries">
+                                <div class="row">
+                                    <div class="col-s-2">
+                                        <img :src="country.src" class="img block" style="width:20px;height:15px"/>
+                                    </div>
+                                    <div class="col-s-10">
+                                        {{country.name}}({{country.dial_code}})
+                                    </div>
+                                </div>                                    
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <label for="email" class="label text-standard">E-mail</label>
+                        <input type="email" :class="['dc-input',  {valid: validEmail}]" v-model="input.email" @keyup="toggleValidEmail" @mouse.click="toggleValidEmail" name="" id="">
+                    </div>
+                    <div>
+                        <label for="password" class="label text-standard">Choose password</label>
+                        <input name="password" type="password" :class="['dc-input', {valid: validPasswords}]" v-model="input.password" @keyup="toggleValidPasswords" name="" id="" placeholder="It'll be our secret" style="-webkit-text-security: square;"/>
+                    </div>
+                    <div>
+                        <label for="confirm_password" class="label text-standard">Repeat password</label>
+                        <input type="password" :class="['dc-input', {valid: validPasswords}]" v-model="input.confirm_password" @keyup="toggleValidPasswords" name="" id="" style="-webkit-text-security: square;"/>
+                    </div>
+                    <div class="row pd-top-15">
+                        <input type="checkbox" class="dc-check" v-model="input.policy" name="" id=""/>
+                        <div>
+                            <span>
+                                I consent to the
+                            </span>
+                            <a class="underline">
+                                Privacy Policy
+                            </a>
+                            <span>
+                                &
+                            </span>
+                            <a class="underline">
+                                Terms of Service
+                            </a>
+                        </div>
+                    </div>
+                    <div class="row pd-top-15">
+                        <input type="checkbox" class="dc-check" v-model="input.mailing" name="" id="">
+                        <div>I want to receive stories for trends, inspiration, interior design tips and to be the first to learn about new products & campaigns.</div>
+                    </div>
+                    <div class="" style="margin-top: 25px;">
+                        <button type="submit" class="btn hoverable">Sign up</button>
+                    </div>                    
+                </form>
+            
+            `,
+            data: function () {
+                return {
+                    countries: [],
+                    input: {                        
+                        country: '',
+                        phone: '',
+                        email: '',
+                        password: '',
+                        confirm_password: '',
+                        policy: false,
+                        mailing: true,
+                    },
+                    validEmail : false,
+                    validPasswords : false,
+                    showCountries: false,
+                    setCountry: {
+                        code: '',
+                        dial_code: '',
+                        src: '',
+                    }
+                }
+            },
+            methods: {
+                submit: function() {
+                    console.log(this.input)
+                },
+                setCode: function(countryCode) {
+                    const selectedCountry = this.countries.find((country) => country.code==  countryCode);
+                    this.setCountry.dial_code = selectedCountry.dial_code;
+                    this.setCountry.src = selectedCountry.src;
+                    this.setCountry.code = selectedCountry.code;
+                    this.input.country = this.setCountry.dial_code;
+                },
+                toggleCountries: function() {
+                    this.showCountries = !this.showCountries;
+                    //to add the valid class to show the green mark
+                },
+                toggleValidPasswords: function() {
+                    
+                    if (this.input.password === null || this.input.password === '') {
+                        this.validPasswords = false;
+                    } else if (this.input.confirm_password === null || this.input.confirm_password === '') {
+                        this.validPasswords = false;
+                    } else {
+                        this.validPasswords = (this.input.password === this.input.confirm_password) ? true : false;
+                    }
+                    //to add the valid class to show the green mark                  
+                },
+                toggleValidEmail: function() {
+                    this.validEmail = (this.input.email == null || this.input.email == '') ?  false :  true;
+                }
+            },
+            async mounted() {
+                const res = await fetch('./assets/countries.json')
+                const countries = await res.json()
+
+                countries.forEach(country => {
+                    country.flagcode = country.code.toLowerCase();
+                    country.src = 'https://flagcdn.com/16x12/'+country.flagcode+'.png';
+                    country.style = 'width:100%;height:100%;background-image:url('+country.src+')';
+                });               
+                
+                this.countries = countries;
+                this.setCode('SE'); //sets default country code to sweden's
+            },
+            components: ['form-input'],
+        })
+        signUp.component('form-input', {
+
+        })
+        signUp.mount('#root')
+    </script>
+</body>
+</html>
