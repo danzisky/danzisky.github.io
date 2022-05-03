@@ -12,6 +12,7 @@
     width:100%;
     box-sizing: border-box;
     border-radius: 2px;
+    background-color: rgba(255, 255, 255, 0.9);
 }
 .dc-select{
     padding:9px 0;
@@ -21,6 +22,7 @@
     width:100%;
     box-sizing: border-box;
     border-radius: 2px;
+    background-color: rgba(255, 255, 255, 0.9);
 }
 .dc-check{
     background: #EDF2F5;
@@ -28,6 +30,7 @@
 
     box-shadow: inset 1px 2px 2px rgba(109, 109, 142, 0.15);
     border-radius: 2.58px;
+    background-color: rgba(255, 255, 255, 0.9);
 }
 .row {
     display: flex;
@@ -212,6 +215,14 @@ display: inline-block;
     /* background-position: 100%; */
     background-position-x: 97%;
     background-position-y: center;
+    animation: animated-mark 0.02s cubic-bezier(0.6, -0.28, 0.735, 0.045);
+}
+@keyframes animated-mark {
+    from {
+        background-position-y: 20%;
+    } to {
+        background-position-y: center;
+    }
 }
 .dropdown {
     background-image: url(../svg/dropdown.svg);
@@ -219,6 +230,7 @@ display: inline-block;
     /* background-position: 100%; */
     background-position-x: 94%;
     background-position-y: center;
+    background-color: rgba(255, 255, 255, 0.9);
 }
 .paddin-8-16 {
     padding: 8px 8px 16px 16px;
@@ -291,7 +303,6 @@ display: inline-block;
     .responsive {
         width: 100%;
         display:block;
-        overflow-x:auto;
     }
     .detatch {
         width: 90%;
@@ -301,16 +312,17 @@ display: inline-block;
         transform: translate(-50%, -50%);
         display:block;
         margin-top: 80%;
-        margin-bottom: 40px;
+        padding-bottom: 40px;
         margin-right: auto;
         margin-left: auto;
         padding: 30px;
         overflow-x:auto;
-        overflow-y:scroll;
-        background-color: rgba(255, 255, 255, 0.9);
+        overflow-y:auto;
+        /* background-color: rgba(255, 255, 255, 0.9); */
         border-radius: 2px;
-        border:0.3px solid #D5D3DE;
-        border-width: 2px;
+        background-color: rgba(237, 242, 245, 0.8);
+
+        /* border:0.003px solid #D5D3DE; */
     }
     .sticky-s {
         position: sticky;
