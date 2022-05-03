@@ -109,8 +109,7 @@
                     </div>
                     <div>
                         <label for="email" class="label text-standard">E-mail</label>
-                        <input name="email" id="email" type="email" :class="['dc-input',  {valid: validEmail}]" v-model="input.email" @keyup="toggleValidEmail" @mouse.click="toggleValidEmail" id="" v-validate>
-                        <dic v-if="errors.email">{{ errors.email }}</div>
+                        <input name="email" id="email" type="email" :class="['dc-input',  {valid: validEmail}]" v-model="input.email" @keyup="toggleValidEmail" @mouse.click="toggleValidEmail" id="">
                     </div>
                     <div>
                         <label for="password" class="label text-standard">Choose password</label>
