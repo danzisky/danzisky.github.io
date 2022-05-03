@@ -108,16 +108,27 @@
                         </div>
                     </div>
                     <div>
-                        <label for="email" class="label text-standard">E-mail</label>
-                        <input name="email" id="email" type="email" :class="['dc-input',  {valid: validEmail}]" v-model="input.email" @keyup="toggleValidEmail" @mouse.click="toggleValidEmail" id="">
+                        <label for="email" class="label text-standard inline">E-mail</label>
+                        <input name="email" id="email" type="email" :class="['dc-input',  {valid: validEmail}]" v-model="input.email" @input="toggleValidEmail" @click="toggleValidEmail" id="">
                     </div>
                     <div>
-                        <label for="password" class="label text-standard">Choose password</label>
-                        <input name="password" id="password" type="password" :class="['dc-input', {valid: validPasswords}]" v-model="input.password" @keyup="toggleValidPasswords" id="" placeholder="It'll be our secret" style="-webkit-text-security: square;"/>
+                        <label for="password" class="label text-standard inline">Choose password</label>
+                        
+                        <input name="password" id="password" :type="password_visible ? 'text' : 'password'" :class="['dc-input', {valid: validPasswords}]" v-model="input.password" @input="toggleValidPasswords" id="" placeholder="It'll be our secret"/>
+                        <div class="block visibility-toggle" v-if="input.password == '' ? false: true">
+                            <span @click="togglePasswordVisibility" class="right">
+                                {{ input.password != '' ? ((password_visible) ? 'hide' : 'show') : '' }}
+                            </span>
+                        </div>
                     </div>
                     <div>
-                        <label for="confirm_password" class="label text-standard">Repeat password</label>
-                        <input name="confirm_password" id="confirm_password" type="password" :class="['dc-input', {valid: validPasswords}]" v-model="input.confirm_password" @keyup="toggleValidPasswords" name="" id="" style="-webkit-text-security: square;"/>
+                        <label for="confirm_password" class="label text-standard inline">Repeat password</label>
+                        <input name="confirm_password" id="confirm_password" :type="repeatpassword_visible ? 'text' : 'password'" :class="['dc-input', {valid: validPasswords}]" v-model="input.confirm_password" @input="toggleValidPasswords" name="" id=""/>
+                        <div class="block visibility-toggle" v-if="input.confirm_password == '' ? false: true">
+                            <span @click="toggleRepeatPasswordVisibility" class="right">
+                                {{ input.confrim_password != '' ? ((repeatpassword_visible) ? 'hide' : 'show') : '' }}
+                            </span>
+                        </div>
                     </div>
                     <div class="row pd-top-15">
                         <input name="privacy_policy" id="policy" type="checkbox" class="dc-check" v-model="input.policy" name="" id=""/>
@@ -161,6 +172,8 @@
                     validEmail : false,
                     validPasswords : false,
                     showCountries: false,
+                    password_visible: false,
+                    repeatpassword_visible: false,
                     setCountry: {
                         code: '',
                         dial_code: '',
@@ -179,6 +192,13 @@
                     this.setCountry.code = selectedCountry.code;
                     this.input.country = this.setCountry.dial_code;
                 },
+                validateEmail: function(email) {
+                    return String(email)
+                        .toLowerCase()
+                        .match(
+                        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+                        );
+                },
                 toggleCountries: function() {
                     this.showCountries = !this.showCountries;
                     //to add the valid class to show the green mark
@@ -195,7 +215,19 @@
                     //to add the valid class to show the green mark                  
                 },
                 toggleValidEmail: function() {
-                    this.validEmail = (this.input.email == null || this.input.email == '') ?  false :  true;
+                    if (this.validateEmail(this.input.email)) {
+                        this.validEmail = true;
+                    } else {
+                        this.validEmail = false; 
+                    }
+                    
+                    // this.validEmail = (this.input.email == null || this.input.email == '') ?  false :  true;
+                },
+                togglePasswordVisibility: function() {
+                    this.password_visible = !this.password_visible;
+                },
+                toggleRepeatPasswordVisibility: function() {
+                    this.repeatpassword_visible = !this.repeatpassword_visible;
                 }
             },
             async mounted() {

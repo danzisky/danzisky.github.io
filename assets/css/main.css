@@ -11,6 +11,10 @@ body {
 .light-grey {
     background-color: rgba(213, 211, 222, 0.9);
 }
+input::-ms-reveal,
+input::-ms-clear {
+    display: none;
+}
 .dc-input{
     padding:8px;
     height:40px;
@@ -77,6 +81,16 @@ body {
     display: block;
     padding-top: 8px;
     padding-bottom: 20px;
+}
+.visibility-toggle {    
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 17px;
+    /* or 142% */
+    letter-spacing: 0.015em;
+    display: block;
+    padding-top: 4px;
+    padding-bottom: 4px;
 }
 .header-text {
     font-family: 'Mulish';
@@ -224,9 +238,12 @@ display: inline-block;
     background-position-y: center;
     animation: animated-mark 0.02s cubic-bezier(0.6, -0.28, 0.735, 0.045);
 }
+.animate_down {
+    animation: animated-mark 0.02s cubic-bezier(0.6, -0.28, 0.735, 0.045);
+}
 @keyframes animated-mark {
     from {
-        background-position-y: 20%;
+        background-position-y: 80%;
     } to {
         background-position-y: center;
     }
