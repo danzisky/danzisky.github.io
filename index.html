@@ -20,23 +20,25 @@
             </div>
             <div class="responsive half padding-half pd-top-60 pd-bottom-20 detatch">
                 <!-- other half div -->
-                <div class="header-text main-primary">
-                    Welcome to Distancify.
-                    <br>                
-                    Create your account.
-                </div>
-                <div class="" style="padding-top: 12px;">
-                    <span class="member-text">
-                        Already a member?
-                    </span>
-                    
-                    <a class="signup">
-                        Sign In
-                    </a>
-                </div>
-                <div class="" style="margin-top: 35px;">
-                    <signup-form/>
-                </div>
+                <div class="">
+                    <div class="header-text main-primary">
+                        Welcome to Distancify.
+                        <br>                
+                        Create your account.
+                    </div>
+                    <div class="" style="padding-top: 12px;">
+                        <span class="member-text">
+                            Already a member?
+                        </span>
+                        
+                        <a class="signup">
+                            Sign In
+                        </a>
+                    </div>
+                    <div class="" style="margin-top: 35px;">
+                        <signup-form/>
+                    </div>
+                </div>                
                 
             </div>
         </div> 
@@ -107,15 +109,16 @@
                     </div>
                     <div>
                         <label for="email" class="label text-standard">E-mail</label>
-                        <input type="email" :class="['dc-input',  {valid: validEmail}]" v-model="input.email" @keyup="toggleValidEmail" @mouse.click="toggleValidEmail" name="" id="">
+                        <input name="email" id="email" type="email" :class="['dc-input',  {valid: validEmail}]" v-model="input.email" @keyup="toggleValidEmail" @mouse.click="toggleValidEmail" id="" v-validate>
+                        <dic v-if="errors.email">{{ errors.email }}</div>
                     </div>
                     <div>
                         <label for="password" class="label text-standard">Choose password</label>
-                        <input name="password" type="password" :class="['dc-input', {valid: validPasswords}]" v-model="input.password" @keyup="toggleValidPasswords" name="" id="" placeholder="It'll be our secret" style="-webkit-text-security: square;"/>
+                        <input name="password" id="password" type="password" :class="['dc-input', {valid: validPasswords}]" v-model="input.password" @keyup="toggleValidPasswords" id="" placeholder="It'll be our secret" style="-webkit-text-security: square;"/>
                     </div>
                     <div>
                         <label for="confirm_password" class="label text-standard">Repeat password</label>
-                        <input type="password" :class="['dc-input', {valid: validPasswords}]" v-model="input.confirm_password" @keyup="toggleValidPasswords" name="" id="" style="-webkit-text-security: square;"/>
+                        <input name="confirm_password" id="confirm_password" type="password" :class="['dc-input', {valid: validPasswords}]" v-model="input.confirm_password" @keyup="toggleValidPasswords" name="" id="" style="-webkit-text-security: square;"/>
                     </div>
                     <div class="row pd-top-15">
                         <input type="checkbox" class="dc-check" v-model="input.policy" name="" id=""/>
